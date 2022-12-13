@@ -11,34 +11,52 @@ class Pixel {
             val = 'H';
         } else if (this.isT()) {
             val = 'T';
+        } else {
+            val = this.values.sort((a, b) => a - b)[0];
         }
-        process.stdout.write(val);
+
+        if (!val) {
+            val = '.';
+        }
+
+        process.stdout.write(val + '');
     }
 
     isH() {
-        return this.values.includes('H');
+        return this.is('H');
     }
 
     isT() {
-        return this.values.includes('T');
+        return this.is('T');
+    }
+
+    is(item) {
+        return this.values.includes(item);
     }
 
     addH() {
-        this.values.push('H');
+        this.add('H');
     }
 
     addT() {
-        this.values.push('T');
+        this.add('T');
+    }
+
+    add(item) {
+        this.values.push(item);
     }
 
     removeH() {
-        this.values.splice(this.values.indexOf('H'), 1);
-        this.historic.push('H');
+        this.remove('H');
     }
 
     removeT() {
-        this.values.splice(this.values.indexOf('T'), 1);
-        this.historic.push('T');
+        this.remove('T');
+    }
+
+    remove(item) {
+        this.values.splice(this.values.indexOf(item), 1);
+        this.historic.push(item);
     }
 }
 
